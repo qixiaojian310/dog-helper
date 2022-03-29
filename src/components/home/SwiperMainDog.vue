@@ -7,11 +7,13 @@
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
         :thumbs="{ swiper: thumbSwiper }"
+        :effect="'cube'"
+        :keyboard="{ enabled: true, onlyInViewport: true }"
         @swiper="onSwiper"
         @slideChange="onSlideChange"
       >
         <!-- :thumbs="{ swiper:thumbSwiper }" -->
-        <swiper-slide v-for="(picture,index) in pictures" :key="index">
+        <swiper-slide v-for="(picture, index) in pictures" :key="index">
           <div
             class="swiper-picture-box"
             :style="{
@@ -47,7 +49,7 @@
       >
         <swiper-slide
           class="thumb-slide"
-          v-for="(picture,index) in pictures"
+          v-for="(picture, index) in pictures"
           :key="index"
         >
           <div
@@ -77,8 +79,9 @@ import {
   Scrollbar,
   A11y,
   Thumbs,
-  EffectCoverflow,
+  EffectCube,
   FreeMode,
+  Keyboard,
 } from "swiper";
 
 // Import Swiper Vue.js components
@@ -90,8 +93,9 @@ import "swiper/modules/navigation/navigation.min.css";
 import "swiper/modules/pagination/pagination.min.css";
 import "swiper/modules/thumbs/thumbs.min.css";
 import "swiper/modules/scrollbar/scrollbar.min.css";
-import "swiper/modules/effect-coverflow/effect-coverflow.min.css";
+import "swiper/modules/effect-cube/effect-cube.min.css";
 import "swiper/modules/free-mode/free-mode.min.css";
+import "swiper/modules/keyboard/keyboard.min.css";
 import DogPicture from "./DogPicture.vue";
 
 // Import Swiper styles
@@ -104,7 +108,7 @@ export default {
   data() {
     return {
       thumbSlideHeight: 0,
-      modules: [Pagination, Scrollbar, A11y, Thumbs, EffectCoverflow],
+      modules: [Pagination, Scrollbar, A11y, Thumbs, EffectCube, Keyboard],
       thumbModules: [Thumbs, FreeMode],
       thumbSwiper: null,
       thumbSlideHeight: this.$store.state.windowHeight / 4,

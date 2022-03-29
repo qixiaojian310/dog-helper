@@ -1,6 +1,41 @@
 <template>
-  <div @wheel="windowAddMouseWheel">
+  <div
+    @wheel="windowAddMouseWheel"
+    @keydown.up="decreaseIndex"
+    @keydown.down="increaseIndex"
+  >
     <div class="logo">
+      <el-button
+        class="logo-btn"
+        type="info"
+        :round="true"
+        :size="60"
+        @click="changeQRStatus"
+      >
+        <el-avatar :class="{ showing: this.qrcodeShowing }" :size="60">
+          <svg
+            t="1648310484016"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="2815"
+            width="60"
+            height="60"
+          >
+            <path
+              d="M426.666667 955.733333H238.933333c-75.093333 0-136.533333-61.44-136.533333-136.533333v-187.733333c0-20.48 13.653333-34.133333 34.133333-34.133334h290.133334c20.48 0 34.133333 13.653333 34.133333 34.133334V921.6c0 20.48-13.653333 34.133333-34.133333 34.133333zM170.666667 665.6V819.2c0 37.546667 30.72 68.266667 68.266666 68.266667h153.6v-221.866667H170.666667zM426.666667 494.933333H136.533333c-20.48 0-34.133333-13.653333-34.133333-34.133333V273.066667c0-75.093333 61.44-136.533333 136.533333-136.533334h187.733334c20.48 0 34.133333 13.653333 34.133333 34.133334v290.133333c0 20.48-13.653333 34.133333-34.133333 34.133333z m-256-68.266666h221.866666V204.8H238.933333c-37.546667 0-68.266667 30.72-68.266666 68.266667v153.6zM887.466667 494.933333h-290.133334c-20.48 0-34.133333-13.653333-34.133333-34.133333V170.666667c0-20.48 13.653333-34.133333 34.133333-34.133334H785.066667c75.093333 0 136.533333 61.44 136.533333 136.533334v187.733333c0 20.48-13.653333 34.133333-34.133333 34.133333z m-256-68.266666H853.333333V273.066667c0-37.546667-30.72-68.266667-68.266666-68.266667h-153.6v221.866667z"
+              fill="#333333"
+              p-id="2816"
+            ></path>
+            <path
+              d="M853.333333 955.733333c-20.48 0-34.133333-13.653333-34.133333-34.133333v-290.133333c0-20.48 13.653333-34.133333 34.133333-34.133334s34.133333 13.653333 34.133334 34.133334V921.6c0 20.48-13.653333 34.133333-34.133334 34.133333zM631.466667 955.733333c-20.48 0-34.133333-13.653333-34.133334-34.133333v-290.133333c0-20.48 13.653333-34.133333 34.133334-34.133334s34.133333 13.653333 34.133333 34.133334V921.6c0 20.48-13.653333 34.133333-34.133333 34.133333z"
+              fill="#FFAF00"
+              p-id="2817"
+            ></path>
+          </svg>
+        </el-avatar>
+      </el-button>
       <el-button
         class="logo-btn"
         type="primary"
@@ -81,94 +116,43 @@
         </el-avatar>
       </el-button>
     </div>
-    <el-drawer v-model="openDrawer" :direction="'rtl'" :size="200">
-      <template #title>
-        <h4>频道</h4>
-      </template>
-      <template #default>
-        <div class="link-box">
-          <link-avatar :address="'/home'" :title="'陈燕和她的导盲犬'">
-            <svg
-              t="1648310426919"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="2659"
-              width="100"
-              height="100"
-            >
-              <path
-                d="M512 864c-172.8 0-304-64-304-153.6 0-60.8 64-112 169.6-137.6 16-3.2 35.2 6.4 38.4 22.4 3.2 16-6.4 35.2-22.4 38.4-76.8 19.2-118.4 51.2-118.4 73.6 0 35.2 92.8 89.6 240 89.6s240-51.2 240-89.6c0-22.4-41.6-57.6-118.4-73.6-16-3.2-28.8-22.4-22.4-38.4 3.2-16 22.4-28.8 38.4-22.4 105.6 25.6 169.6 76.8 169.6 137.6C816 800 684.8 864 512 864z"
-                fill="#333333"
-                p-id="2660"
-              ></path>
-              <path
-                d="M512 752c-12.8 0-25.6-9.6-32-22.4l-160-544c-6.4-16 3.2-35.2 22.4-38.4 16-6.4 35.2 3.2 38.4 22.4l160 544c6.4 16-3.2 35.2-22.4 38.4H512z"
-                fill="#F5AA19"
-                p-id="2661"
-              ></path>
-              <path
-                d="M528 451.2c-67.2 0-99.2-9.6-102.4-9.6-16-3.2-28.8-22.4-22.4-38.4 3.2-16 22.4-28.8 38.4-22.4 0 0 51.2 12.8 150.4 3.2 44.8-3.2 83.2-19.2 105.6-32l-41.6-57.6c-3.2-6.4-6.4-12.8-6.4-19.2V227.2c-22.4 12.8-48 28.8-80 35.2-32 9.6-67.2 0-96-6.4-25.6-6.4-57.6-12.8-64-3.2-9.6 12.8-32 16-44.8 6.4-12.8-9.6-16-32-6.4-44.8 32-41.6 86.4-28.8 128-19.2 25.6 6.4 51.2 12.8 67.2 6.4 67.2-19.2 105.6-64 105.6-64 9.6-9.6 22.4-16 35.2-9.6 12.8 3.2 22.4 16 22.4 32l-3.2 108.8 54.4 76.8c9.6 12.8 6.4 32-6.4 41.6-3.2 3.2-64 54.4-166.4 60.8-25.6 3.2-48 3.2-67.2 3.2z"
-                fill="#F5AA19"
-                p-id="2662"
-              ></path>
-            </svg>
-          </link-avatar>
-          <link-avatar :address="'/about'" :title="'二维码'">
-            <svg
-              t="1648310484016"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="2815"
-              width="100"
-              height="100"
-            >
-              <path
-                d="M426.666667 955.733333H238.933333c-75.093333 0-136.533333-61.44-136.533333-136.533333v-187.733333c0-20.48 13.653333-34.133333 34.133333-34.133334h290.133334c20.48 0 34.133333 13.653333 34.133333 34.133334V921.6c0 20.48-13.653333 34.133333-34.133333 34.133333zM170.666667 665.6V819.2c0 37.546667 30.72 68.266667 68.266666 68.266667h153.6v-221.866667H170.666667zM426.666667 494.933333H136.533333c-20.48 0-34.133333-13.653333-34.133333-34.133333V273.066667c0-75.093333 61.44-136.533333 136.533333-136.533334h187.733334c20.48 0 34.133333 13.653333 34.133333 34.133334v290.133333c0 20.48-13.653333 34.133333-34.133333 34.133333z m-256-68.266666h221.866666V204.8H238.933333c-37.546667 0-68.266667 30.72-68.266666 68.266667v153.6zM887.466667 494.933333h-290.133334c-20.48 0-34.133333-13.653333-34.133333-34.133333V170.666667c0-20.48 13.653333-34.133333 34.133333-34.133334H785.066667c75.093333 0 136.533333 61.44 136.533333 136.533334v187.733333c0 20.48-13.653333 34.133333-34.133333 34.133333z m-256-68.266666H853.333333V273.066667c0-37.546667-30.72-68.266667-68.266666-68.266667h-153.6v221.866667z"
-                fill="#333333"
-                p-id="2816"
-              ></path>
-              <path
-                d="M853.333333 955.733333c-20.48 0-34.133333-13.653333-34.133333-34.133333v-290.133333c0-20.48 13.653333-34.133333 34.133333-34.133334s34.133333 13.653333 34.133334 34.133334V921.6c0 20.48-13.653333 34.133333-34.133334 34.133333zM631.466667 955.733333c-20.48 0-34.133333-13.653333-34.133334-34.133333v-290.133333c0-20.48 13.653333-34.133333 34.133334-34.133334s34.133333 13.653333 34.133333 34.133334V921.6c0 20.48-13.653333 34.133333-34.133333 34.133333z"
-                fill="#FFAF00"
-                p-id="2817"
-              ></path>
-            </svg>
-          </link-avatar>
-          <link-avatar :address="'/map'" :title="'导盲犬地图'">
-            <svg
-              t="1648310545565"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="2982"
-              width="100"
-              height="100"
-            >
-              <path
-                d="M887.466667 955.733333H136.533333c-13.653333 0-23.893333-6.826667-30.72-17.066666-6.826667-10.24-6.826667-23.893333 0-34.133334L215.04 716.8c10.24-17.066667 30.72-20.48 47.786667-13.653333 17.066667 10.24 20.48 30.72 13.653333 47.786666l-78.506667 136.533334h631.466667L750.933333 750.933333c-10.24-17.066667-3.413333-37.546667 13.653334-47.786666 17.066667-10.24 37.546667-3.413333 47.786666 13.653333l109.226667 187.733333c6.826667 10.24 6.826667 23.893333 0 34.133334-10.24 10.24-20.48 17.066667-34.133333 17.066666z"
-                fill="#333333"
-                p-id="2983"
-              ></path>
-              <path
-                d="M512 819.2c-6.826667 0-13.653333-3.413333-20.48-6.826667-10.24-6.826667-266.24-197.973333-266.24-392.533333C228.693333 262.826667 354.986667 136.533333 512 136.533333s286.72 126.293333 286.72 286.72c0 194.56-252.586667 382.293333-266.24 392.533334-6.826667 0-13.653333 3.413333-20.48 3.413333z m0-614.4c-119.466667 0-218.453333 95.573333-218.453333 218.453333 0 119.466667 139.946667 259.413333 215.04 320.853334 58.026667-47.786667 218.453333-187.733333 218.453333-320.853334C730.453333 300.373333 631.466667 204.8 512 204.8z"
-                fill="#333333"
-                p-id="2984"
-              ></path>
-              <path
-                d="M518.826667 552.96c-71.68 0-133.12-58.026667-133.12-133.12 0-71.68 58.026667-133.12 133.12-133.12 71.68 0 133.12 58.026667 133.12 133.12-3.413333 75.093333-61.44 133.12-133.12 133.12z m0-228.693333c-54.613333 0-98.986667 44.373333-98.986667 98.986666 0 54.613333 44.373333 98.986667 98.986667 98.986667 54.613333 0 98.986667-44.373333 98.986666-98.986667-3.413333-54.613333-44.373333-98.986667-98.986666-98.986666z"
-                fill="#FFAF00"
-                p-id="2985"
-              ></path>
-            </svg>
-          </link-avatar>
-        </div>
-      </template>
-    </el-drawer>
+    <div
+      id="QR-box"
+      class="animate__animated"
+      :class="{
+        animate__bounceOutRight: !this.qrcodeShowing,
+        animate__bounceInRight: this.qrcodeShowing,
+      }"
+    >
+      <p>二维码</p>
+      <QRCodeVue3
+        :width="200"
+        :height="200"
+        value="https://www.baidu.com"
+        :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
+        :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
+        :dotsOptions="{
+          type: 'dots',
+          color: '#Ef9b6c',
+          gradient: {
+            type: 'linear',
+            rotation: 0,
+            colorStops: [
+              { offset: 0, color: '#Ef9b6c' },
+              { offset: 1, color: '#Ef9b6c' },
+            ],
+          },
+        }"
+        :backgroundOptions="{ color: '#ffffff' }"
+        :cornersSquareOptions="{ type: 'dot', color: '#7c492b' }"
+        :cornersDotOptions="{ type: undefined, color: '#7c492b' }"
+        :image="require('@/assets/images/doge.png')"
+        fileExt="png"
+        myclass="my-qur"
+        imgclass="img-qr"
+      />
+    </div>
+
     <!-- 播放器 -->
     <div
       class="audio-box"
@@ -190,9 +174,10 @@
 // import {AOS} from 'aos';
 import LinkAvatar from "./components/main/LinkAvatar.vue";
 import AudioPlayer from "@/components/audio/AudioPlayer";
+import QRCodeVue3 from "qrcode-vue3";
 
 export default {
-  components: { LinkAvatar, AudioPlayer },
+  components: { LinkAvatar, AudioPlayer, QRCodeVue3 },
   name: "App",
   data() {
     return {
@@ -226,12 +211,44 @@ export default {
       ],
       showAudioPlayer: 0,
       showAudioPlayerBox: false,
+      qrcodeShowing: false,
     };
   },
   mounted() {
     this.reloadChange();
+    document.addEventListener("keydown", (e) => {
+      console.log(e.key);
+      if (e.key == "ArrowUp") {
+        this.decreaseIndex();
+      } else if (e.key == "ArrowDown") {
+        this.increaseIndex();
+      } else {
+      }
+      // 下面可以通过keyCode来添加键盘事件
+    });
   },
   methods: {
+    changeQRStatus() {
+      this.qrcodeShowing = !this.qrcodeShowing;
+    },
+    increaseIndex() {
+      console.log("increase");
+      this.nowLinkIndex = (this.nowLinkIndex + 1) % this.routerLinks.length;
+      this.$router.push({
+        path: "/" + this.routerLinks[this.nowLinkIndex].path,
+      });
+    },
+    decreaseIndex() {
+      console.log("decrease");
+      if (this.routerLinks > 0) {
+        this.nowLinkIndex = (this.nowLinkIndex - 1) % this.routerLinks.length;
+      } else {
+        this.nowLinkIndex = 0;
+      }
+      this.$router.push({
+        path: "/" + this.routerLinks[this.nowLinkIndex].path,
+      });
+    },
     windowAddMouseWheel(event) {
       var routerGo = "";
       if (event.deltaY > 0) {
@@ -246,28 +263,30 @@ export default {
         this.scrollDirection = "up";
         console.log("向上滚动");
         if (this.routerLinks > 0) {
-          this.nowLinkIndex = (this.nowLinkIndex + 1) % this.routerLinks.length;
+          this.nowLinkIndex = (this.nowLinkIndex - 1) % this.routerLinks.length;
         } else {
           this.nowLinkIndex = 0;
         }
         this.$router.push({
           path: "/" + this.routerLinks[this.nowLinkIndex].path,
         });
+      } else {
+        console.log("横向滚动");
       }
     },
     //改变抽屉状态
     changeDrawerStatus() {
       // this.openDrawer = !this.openDrawer;
-      if(this.showAudioPlayerBox){
+      if (this.showAudioPlayerBox) {
         setTimeout(() => {
           this.showAudioPlayerBox = false;
-        }, 200);
-        this.showAudioPlayer = 0
-      }else{
-        setTimeout(()=>{
+        }, 100);
+        this.showAudioPlayer = 0;
+      } else {
+        setTimeout(() => {
           this.showAudioPlayerBox = true;
-        },200)
-        this.showAudioPlayer = 1
+        }, 100);
+        this.showAudioPlayer = 1;
       }
     },
     //监听窗口大小变化
@@ -287,16 +306,17 @@ export default {
   position: absolute;
   bottom: 0%;
   left: 0%;
-  height: 90px;
+  height: 180px;
   width: 100px;
   z-index: 4;
   display: flex;
-  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
 }
 .logo-btn {
   margin: 0px;
   margin-left: 10px;
-  margin-right: 20px;
+  margin-right: 30px;
   height: 60px;
   padding: 0px !important;
 }
@@ -319,6 +339,25 @@ export default {
 }
 .listening {
   animation: listening 1.1s infinite linear;
+}
+.showing {
+  animation: listening 1s ease-in-out;
+}
+#QR-box {
+  position: absolute;
+  right: 0;
+  bottom: 100px;
+  height: 300px;
+  width: 220px;
+  padding: 10px;
+  z-index: 1000;
+  background: #ffffffc5;
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+#QR-box p {
+  font-size: 1.3rem;
+  text-align: center;
 }
 @keyframes listening {
   from {
