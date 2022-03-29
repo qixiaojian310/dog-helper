@@ -1,17 +1,16 @@
 <template>
-  <figure class="effect-oscar wowload fadeIn">
+  <figure class="effect-oscar" >
     <img :src="pictureSrc" alt="img01" />
     <figcaption>
-      <h2>|{{title}}|</h2>
-      <p>
-        {{hoverTitle}}<br />
-        <a
-          href="../assets/../assets/images/portfolio/1.jpg"
+      <h2 :class="{'thumb-h2' : isThumbs}">|{{ title }}|</h2>
+      <div v-if="!isThumbs" >
+        <p>{{ hoverTitle }}</p><br />
+        <p
           title="1"
-          data-gallery
-          >聆听</a
+          @click="changeIndex"
+          >聆听</p
         >
-      </p>
+      </div>
     </figcaption>
   </figure>
 </template>
@@ -22,26 +21,58 @@ export default {
   props: {
     title: {
       type: String,
-      default: '',
+      default: "",
     },
     hoverTitle: {
       type: String,
-      default: '',
+      default: "",
     },
-    pictureSrc:{
+    pictureSrc: {
       type: String,
-      default: '',
+      default: "",
+    },
+    figureWidth: {
+      type: Number,
+      default: 80,
+    },
+    isThumbs: {
+      type: Boolean,
+    },
+    pictureIndex: {
+      type: Number,
+      default: 0,
     },
   },
-
+  methods: {
+    changeIndex() {
+      this.$store.commit("setMusicIndex", this.pictureIndex);
+    },
+  },
 };
 </script>
 
 
 <style scoped>
-figcaption{
-  box-sizing: border-box ;
+figcaption {
+  box-sizing: border-box;
 }
 </style>
 <style src="../../assets/css/set.css">
+</style>
+
+<style scoped>
+figure {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+}
+.thumb-h2 {
+  opacity: 0;
+}
+p {
+  font-size: 2rem;
+}
 </style>

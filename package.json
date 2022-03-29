@@ -9,12 +9,15 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^1.1.4",
     "@popperjs/core": "^2.11.4",
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "core-js": "^3.6.5",
+    "echarts": "^4.9.0",
     "element-plus": "^2.1.4",
     "font-awesome": "^4.7.0",
+    "swiper": "^8.0.7",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
