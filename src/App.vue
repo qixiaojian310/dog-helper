@@ -128,7 +128,7 @@
       <QRCodeVue3
         :width="200"
         :height="200"
-        value="https://www.baidu.com"
+        value="https://v4pre.h5sys.cn/play/o2VSgSYG"
         :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
         :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
         :dotsOptions="{
