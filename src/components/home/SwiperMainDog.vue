@@ -24,6 +24,7 @@
             <dog-picture
               :hover-title="picture.hoverTitle"
               :picture-src="picture.src"
+              :picture-irc-src="picture.ircSrc"
               :title="picture.title"
               :picture-index="index"
               :isThumbs="false"

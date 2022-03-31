@@ -1,21 +1,19 @@
 <template>
-  <figure class="effect-oscar" >
+  <figure class="effect-oscar">
     <img :src="pictureSrc" alt="img01" />
     <figcaption>
-      <h2 :class="{'thumb-h2' : isThumbs}">|{{ title }}|</h2>
-      <div v-if="!isThumbs" >
-        <p>{{ hoverTitle }}</p><br />
-        <p
-          title="1"
-          @click="changeIndex"
-          >聆听</p
-        >
+      <h2 :class="{ 'thumb-h2': isThumbs }">|{{ title }}|</h2>
+      <div v-if="!isThumbs">
+        <p>{{ hoverTitle }}</p>
+        <br />
+        <p title="1" @click="changeIndex">聆听</p>
       </div>
     </figcaption>
   </figure>
 </template>
 
 <script>
+
 export default {
   name: "DogPicture",
   props: {
@@ -41,6 +39,10 @@ export default {
     pictureIndex: {
       type: Number,
       default: 0,
+    },
+    pictureIrcSrc: {
+      type: String,
+      default: "",
     },
   },
   methods: {
