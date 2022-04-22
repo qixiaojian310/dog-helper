@@ -37,9 +37,23 @@ export default {
         xAxis: {
           type: "category",
           data: ["飞飞", "罗拉", "哈尼", "凯瑞", "薇薇", "安妮", "华荷拉"],
+          nameTextStyle: {
+            color: "#000000",
+            fontSize: 13,
+          },
+          axisLine: {
+            lineStyle: {
+              color: "rgba(255,255,255, 1)",
+            },
+          },
         },
         yAxis: {
           type: "value",
+          axisLine: {
+            lineStyle: {
+              color: "rgba(255,255,255, 1)",
+            },
+          },
         },
         series: [
           {
@@ -47,6 +61,9 @@ export default {
             showBackground: true,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.2)",
+            },
+            itemStyle: {
+              color: "#ffb697",
             },
           },
         ],
