@@ -10,8 +10,8 @@
       @pause="changePauseState"
       @timeupdate="durationUpdate"
     ></audio>
-    <div class="lyric-box">
-      <p>{{activeLyric}}</p>
+    <div style="display:none;">
+      {{activeLyric}}
     </div>
     <!-- 播放进度条 -->
     <el-row>
@@ -99,7 +99,7 @@ export default {
     activeLyric(){
       for (let index = 0; index < this.listLyric.length; index++) {
         if(this.getStateFn(this.listLyric[index].time,this.listLyric[index].pre)){
-          // this.$store.commit("setActiveLyric",this.listLyric[index].content);
+          this.$store.commit("setActiveLyric",this.listLyric[index].content);
           return this.listLyric[index].content;
         }
       }
@@ -308,6 +308,7 @@ export default {
       this.$store.commit("setIsPlaying", newValue);
     },
   },
+  
 };
 </script>
 

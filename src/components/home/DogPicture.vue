@@ -7,6 +7,9 @@
         <p>{{ hoverTitle }}</p>
         <br />
         <p title="1" @click="changeIndex">聆听</p>
+        <p>
+          {{activeLyric}}
+        </p>
       </div>
     </figcaption>
   </figure>
@@ -50,6 +53,11 @@ export default {
       this.$store.commit("setMusicIndex", this.pictureIndex);
     },
   },
+  computed:{
+    activeLyric(){
+      return this.$store.state.activeLyric;
+    },
+  }
 };
 </script>
 

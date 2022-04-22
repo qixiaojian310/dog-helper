@@ -6,6 +6,7 @@ export default createStore({
     windowHeight: 0,
     musicIndex:0,
     isPlaying:false,
+    activeLyric:""
   },
   mutations: {
     setWindowWidth(state, width) {
@@ -35,6 +36,9 @@ export default createStore({
     },
     setIsPlaying(state, isPlaying) {
       state.isPlaying = isPlaying
+    },
+    setActiveLyric(state, activeLyric) {
+      state.activeLyric = activeLyric
     }
   },
   actions: {
