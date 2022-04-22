@@ -14,7 +14,7 @@ export default {
           triggerOn: "mousemove", //mousemove、click
           padding: 8,
           borderWidth: 1,
-          borderColor: "#409eff",
+          borderColor: "#ffb697",
           backgroundColor: "rgba(255,255,255,0.7)",
           textStyle: {
             color: "#000000",
